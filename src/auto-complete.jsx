@@ -429,9 +429,19 @@ const AutoComplete = React.createClass({
               let searchText = e.target.value;
               this._updateRequests(searchText);
             }}
+            // onBlur={() => {
+            //   if (this.focusOnInput && open)
+            //     this.refs.searchTextField.focus();
+            // }}
             onBlur={() => {
-              if (this.focusOnInput && open)
-                this.refs.searchTextField.focus();
+              if (this.focusOnInput && this.state.open) {
+                const refs = this.refs;
+                setTimeout(() => {
+                  if (refs.searchTextField) {
+                    refs.searchTextField.focus();
+                  }
+                }, 0);
+              }
             }}
             onFocus={() => {
               if (!open && (this.props.triggerUpdateOnFocus
